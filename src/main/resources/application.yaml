@@ -1,1 +1,12 @@
-
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/form_app?createDatabaseIfNotExist=true
+    username: root
+    password: Ad.2711998
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  liquibase:
+    change-log: classpath:db/changelog/app-changelog.xml
+    default-schema: form_app
+  jpa:
+    hibernate:
+      ddl-auto: none
