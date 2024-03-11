@@ -1,7 +1,6 @@
 package com.formapp.damnjan.controllers;
 
-import com.formapp.damnjan.models.request.CreateFormRequestDto;
-import com.formapp.damnjan.models.request.UpdateFormRequestBody;
+import com.formapp.damnjan.models.request.FormRequestDto;
 import com.formapp.damnjan.models.response.TextResponseMessage;
 import com.formapp.damnjan.services.FormService;
 import org.springframework.http.HttpStatus;
@@ -19,8 +18,8 @@ public class FormController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<TextResponseMessage> createForm(@RequestBody CreateFormRequestDto createFormRequestDto) {
-        formService.createForm(createFormRequestDto);
+    public ResponseEntity<TextResponseMessage> createForm(@RequestBody FormRequestDto formRequestDto) {
+        formService.createForm(formRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(new TextResponseMessage("Form created",
                 HttpStatus.CREATED.value()));
     }
@@ -34,8 +33,8 @@ public class FormController {
 
     @PutMapping("/{id}")
     public ResponseEntity<TextResponseMessage> updateFormById(@PathVariable Integer id,
-                                                              @RequestBody UpdateFormRequestBody updateFormRequestBody) {
-        formService.updateForm(id, updateFormRequestBody);
+                                                              @RequestBody FormRequestDto formRequestDto) {
+        formService.updateForm(id, formRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(new TextResponseMessage("Form updated",
                 HttpStatus.OK.value()));
     }

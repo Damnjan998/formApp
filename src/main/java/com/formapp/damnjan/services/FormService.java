@@ -3,12 +3,11 @@ package com.formapp.damnjan.services;
 import com.formapp.damnjan.entities.FormEntity;
 import com.formapp.damnjan.exceptions.ExceptionSupplier;
 import com.formapp.damnjan.mappers.FormMapper;
-import com.formapp.damnjan.models.request.CreateFormRequestDto;
-import com.formapp.damnjan.models.request.UpdateFormRequestBody;
+import com.formapp.damnjan.models.request.FormRequestDto;
 import com.formapp.damnjan.models.response.FormPageResponseModel;
 import com.formapp.damnjan.models.response.FormResponseModel;
 import com.formapp.damnjan.repositories.FormRepository;
-import com.formapp.damnjan.validators.FormValidator;
+import com.formapp.damnjan.validators.PropertyValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,13 +24,13 @@ import static com.formapp.damnjan.utils.PrincipalHelper.checkPermission;
 public class FormService {
 
     private final FormRepository formRepository;
-    private final FormValidator formValidator;
+    private final PropertyValidator propertyValidator;
     private final FormMapper formMapper = FormMapper.INSTANCE;
 
 
-    public FormService(FormRepository formRepository, FormValidator formValidator) {
+    public FormService(FormRepository formRepository, PropertyValidator formValidator) {
         this.formRepository = formRepository;
-        this.formValidator = formValidator;
+        this.propertyValidator = formValidator;
     }
 
     public int countNumberOfPopulatedFormsForDayBefore() {
@@ -42,12 +41,12 @@ public class FormService {
         return formRepository.countByCreatedAt(Timestamp.valueOf(dayBefore.atStartOfDay()));
     }
 
-    public void createForm(CreateFormRequestDto createFormRequestDto) {
+    public void createForm(FormRequestDto formRequestDto) {
 
         checkPermission();
-        formValidator.isFormNameValid(createFormRequestDto.name());
+        propertyValidator.isNameValid(formRequestDto.name());
 
-        FormEntity formEntity = formMapper.createFormRequestDtoToFormEntity(createFormRequestDto);
+        FormEntity formEntity = formMapper.createFormRequestDtoToFormEntity(formRequestDto);
         formEntity.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
 
         formRepository.save(formEntity);
@@ -62,13 +61,13 @@ public class FormService {
         formRepository.delete(formEntity);
     }
 
-    public void updateForm(Integer id, UpdateFormRequestBody updateFormRequestBody) {
-        formValidator.isFormNameValid(updateFormRequestBody.name());
+    public void updateForm(Integer id, FormRequestDto formRequestDto) {
+        propertyValidator.isNameValid(formRequestDto.name());
 
         checkPermission();
 
         FormEntity formEntity = formRepository.findById(id).orElseThrow(ExceptionSupplier.formNotFound);
-        formEntity.setName(updateFormRequestBody.name());
+        formEntity.setName(formRequestDto.name());
         formEntity.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
 
         formRepository.save(formEntity);
@@ -77,7 +76,7 @@ public class FormService {
 
     public FormPageResponseModel<FormResponseModel> getForms(Integer page, Integer size) {
 
-        formValidator.pageSizeValidation(page, size);
+        propertyValidator.pageSizeValidation(page, size);
 
         Pageable pageable = PageRequest.of(page - 1, size);
 

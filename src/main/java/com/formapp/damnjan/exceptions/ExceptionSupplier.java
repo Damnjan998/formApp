@@ -39,6 +39,13 @@ public class ExceptionSupplier {
             ErrorMessages.BAD_REQUEST.getErrorMessage()
     );
 
+    public static final Supplier<FormException> fieldNameIsNotValid = () -> new FormException(
+            ErrorMessages.FIELD_NAME_NOT_VALID.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
     public static final Supplier<FormException> userDoesNotHavePermission = () -> new FormException(
             ErrorMessages.USER_DOES_NOT_HAVE_PERMISSION.getErrorMessage(),
             HttpStatus.FORBIDDEN.value(),
@@ -65,5 +72,33 @@ public class ExceptionSupplier {
             HttpStatus.BAD_REQUEST.value(),
             LocalDateTime.now().format(formatter),
             ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> orderDisplayMustBeGreaterThanZero = () -> new FormException(
+            ErrorMessages.ORDER_DISPLAY_MUST_BE_GREATER_THAN_ZERO.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> formIdMustBeProvided = () -> new FormException(
+            ErrorMessages.FORM_ID_MUST_BE_PROVIDED.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> typeIsNotValid = () -> new FormException(
+            ErrorMessages.TYPE_IS_NOT_VALID.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> fieldNotFound = () -> new FormException(
+            ErrorMessages.FIELD_NOT_FOUND.getErrorMessage(),
+            HttpStatus.NOT_FOUND.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.NOT_FOUND.getErrorMessage()
     );
 }

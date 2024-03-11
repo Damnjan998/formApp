@@ -11,9 +11,11 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormPageResponseModel<T> {
+public class FormPageResponseModel<T> extends PageClass {
     private List<T> forms;
-    private Integer totalPages;
-    private Integer currentPage;
-    private Integer formCount;
+
+    public FormPageResponseModel(List<T> forms, Integer totalPages, Integer currentPage, Integer formCount) {
+        super(totalPages, currentPage, formCount);
+        this.forms = forms;
+    }
 }

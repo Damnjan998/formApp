@@ -1,7 +1,7 @@
 package com.formapp.damnjan.mappers;
 
 import com.formapp.damnjan.entities.FormEntity;
-import com.formapp.damnjan.models.request.CreateFormRequestDto;
+import com.formapp.damnjan.models.request.FormRequestDto;
 import com.formapp.damnjan.models.response.FormResponseModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -13,7 +13,7 @@ public interface FormMapper {
 
     FormMapper INSTANCE = Mappers.getMapper(FormMapper.class);
 
-    FormEntity createFormRequestDtoToFormEntity(CreateFormRequestDto createFormRequestDto);
+    FormEntity createFormRequestDtoToFormEntity(FormRequestDto formRequestDto);
 
     List<FormResponseModel> formEntityToFormResponseModels(List<FormEntity> formEntities);
 
