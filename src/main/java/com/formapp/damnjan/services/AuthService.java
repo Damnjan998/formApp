@@ -59,11 +59,13 @@ public class AuthService {
         AuthResponseDto authResponseDto = new AuthResponseDto();
 
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(singInRequestDto.username(),
-                    singInRequestDto.password()));
 
             UserEntity userEntity = userRepository.findByUsername(singInRequestDto.username())
                     .orElseThrow(ExceptionSupplier.usernameNotFound);
+
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(singInRequestDto.username(),
+                    singInRequestDto.password()));
+
             String jwt = jwtUtils.generateToken(userEntity);
             String refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), userEntity);
             authResponseDto.setToken(jwt);
@@ -71,6 +73,7 @@ public class AuthService {
             authResponseDto.setExpiration("24 Hours");
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw ExceptionSupplier.internalServerError.get();
         }
 

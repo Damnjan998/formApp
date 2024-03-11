@@ -32,4 +32,38 @@ public class ExceptionSupplier {
             ErrorMessages.INTERNAL_SERVER_ERROR.getErrorMessage()
     );
 
+    public static final Supplier<FormException> formNameIsNotValid = () -> new FormException(
+            ErrorMessages.FORM_NAME_NOT_VALID.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> userDoesNotHavePermission = () -> new FormException(
+            ErrorMessages.USER_DOES_NOT_HAVE_PERMISSION.getErrorMessage(),
+            HttpStatus.FORBIDDEN.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.FORBIDDEN.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> formNotFound = () -> new FormException(
+            ErrorMessages.FORM_NOT_FOUND.getErrorMessage(),
+            HttpStatus.NOT_FOUND.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.NOT_FOUND.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> pageWrong = () -> new FormException(
+            ErrorMessages.PAGE_NUMBER_WRONG.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> sizeWrong = () -> new FormException(
+            ErrorMessages.SIZE_NUMBER_WRONG.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
 }
