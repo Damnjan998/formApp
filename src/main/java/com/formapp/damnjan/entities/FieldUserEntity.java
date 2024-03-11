@@ -3,6 +3,7 @@ package com.formapp.damnjan.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.catalina.User;
 
 import java.sql.Timestamp;
 
@@ -35,6 +36,10 @@ public class FieldUserEntity {
     @JoinColumn(name = "field_id")
     private FieldEntity fieldEntity;
 
-    // private Integer formUserId; todo: See if it's many to many
+    @ManyToOne
+    @JoinColumn(name = "form_user_id")
+    private FormUserEntity formUserEntity;
 
+    @Column(name = "last_user_to_modify")
+    private Integer lastUserToModify;
 }

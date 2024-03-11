@@ -7,4 +7,8 @@
 
     <include file="db/changelog/scripts/create_user_table.sql"/>
     <include file="db/changelog/scripts/create_statistic_table.sql"/>
+    <include file="db/changelog/scripts/create_form_table.sql"/>
+    <include file="db/changelog/scripts/create_field_table.sql"/>
+    <include file="db/changelog/scripts/create_form_user_table.sql"/>
+    <include file="db/changelog/scripts/create_field_user_table.sql"/>
 </databaseChangeLog>

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "form")
@@ -24,4 +25,7 @@ public class FormEntity {
 
     @Column(name = "updated_at")
     private Timestamp updatedAt;
+
+    @OneToMany(mappedBy = "formEntity")
+    private List<FormUserEntity> formUserEntityList;
 }

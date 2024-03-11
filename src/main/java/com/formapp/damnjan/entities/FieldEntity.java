@@ -24,6 +24,7 @@ public class FieldEntity {
     private Integer orderDisplay;
 
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     @Column(name = "created_at")
@@ -32,6 +33,8 @@ public class FieldEntity {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-//    private Integer formId; todo: See if it's many to many
+    @ManyToOne
+    @JoinColumn(name = "form_id")
+    private FormEntity formEntity;
 
 }

@@ -28,4 +28,6 @@ public class FormUserEntity {
     @ManyToOne
     @JoinColumn(name = "form_id")
     private FormEntity formEntity;
+    @Column(name = "last_user_to_modify")
+    private Integer lastUserToModify;
 }

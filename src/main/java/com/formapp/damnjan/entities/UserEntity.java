@@ -36,6 +36,9 @@ public class UserEntity implements UserDetails {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
+    @OneToMany(mappedBy = "userEntity")
+    private List<FormUserEntity> formUserEntities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(this.role));
