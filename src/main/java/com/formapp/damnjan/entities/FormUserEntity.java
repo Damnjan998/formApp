@@ -1,8 +1,10 @@
 package com.formapp.damnjan.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.sql.Timestamp;
 
@@ -10,6 +12,10 @@ import java.sql.Timestamp;
 @Table(name = "form_user")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class FormUserEntity {
 
     @Id
@@ -24,6 +30,7 @@ public class FormUserEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @CreatedBy
     private UserEntity userEntity;
     @ManyToOne
     @JoinColumn(name = "form_id")

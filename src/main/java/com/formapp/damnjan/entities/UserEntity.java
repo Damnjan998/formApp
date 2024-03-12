@@ -39,6 +39,12 @@ public class UserEntity implements UserDetails {
     @OneToMany(mappedBy = "userEntity")
     private List<FormUserEntity> formUserEntities;
 
+    @OneToMany(mappedBy = "createdByUser")
+    private List<FormEntity> createdForms;
+
+    @OneToMany(mappedBy = "createdByUser")
+    private List<FieldEntity> createdFields;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(this.role));

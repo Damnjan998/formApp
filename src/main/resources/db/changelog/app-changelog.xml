@@ -5,10 +5,13 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
+    <include file="db/changelog/scripts/create_schema.sql"/>
     <include file="db/changelog/scripts/create_user_table.sql"/>
     <include file="db/changelog/scripts/create_statistic_table.sql"/>
     <include file="db/changelog/scripts/create_form_table.sql"/>
     <include file="db/changelog/scripts/create_field_table.sql"/>
     <include file="db/changelog/scripts/create_form_user_table.sql"/>
     <include file="db/changelog/scripts/create_field_user_table.sql"/>
+    <include file="db/changelog/scripts/alter_form_table.sql"/>
+    <include file="db/changelog/scripts/alter_field_table.sql"/>
 </databaseChangeLog>

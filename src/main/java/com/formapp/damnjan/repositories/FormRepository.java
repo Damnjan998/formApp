@@ -8,5 +8,4 @@ import java.sql.Timestamp;
 
 @Repository
 public interface FormRepository extends JpaRepository<FormEntity, Integer> {
-    int countByCreatedAt(Timestamp createdAt);
 }

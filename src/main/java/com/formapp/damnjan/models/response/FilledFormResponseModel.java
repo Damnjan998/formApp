@@ -11,10 +11,9 @@ import java.sql.Timestamp;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormResponseModel {
+public class FilledFormResponseModel {
 
-    private String name;
+    private FormResponseModel formResponseModel;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private UserResponseModel user;
 }

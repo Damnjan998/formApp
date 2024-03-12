@@ -4,6 +4,9 @@ import com.formapp.damnjan.enumes.Type;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.sql.Timestamp;
 
@@ -11,6 +14,7 @@ import java.sql.Timestamp;
 @Table(name = "field")
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class FieldEntity {
 
     @Id
@@ -36,5 +40,13 @@ public class FieldEntity {
     @ManyToOne
     @JoinColumn(name = "form_id")
     private FormEntity formEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by_user_id")
+    @CreatedBy
+    private UserEntity createdByUser;
+
+    @Column(name = "last_updated_by_user_id")
+    private Integer lastUserToModify;
 
 }

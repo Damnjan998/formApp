@@ -1,6 +1,7 @@
 package com.formapp.damnjan.exceptions;
 
 import com.formapp.damnjan.utils.ErrorMessages;
+import com.zaxxer.hikari.util.FastList;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
@@ -60,6 +61,20 @@ public class ExceptionSupplier {
             ErrorMessages.NOT_FOUND.getErrorMessage()
     );
 
+    public static final Supplier<FormException> filledFormNotFound = () -> new FormException(
+            ErrorMessages.FILLED_FORM_NOT_FOUND.getErrorMessage(),
+            HttpStatus.NOT_FOUND.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.NOT_FOUND.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> filledFieldNotFound = () -> new FormException(
+            ErrorMessages.FILLED_FIELD_NOT_FOUND.getErrorMessage(),
+            HttpStatus.NOT_FOUND.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.NOT_FOUND.getErrorMessage()
+    );
+
     public static final Supplier<FormException> pageWrong = () -> new FormException(
             ErrorMessages.PAGE_NUMBER_WRONG.getErrorMessage(),
             HttpStatus.BAD_REQUEST.value(),
@@ -101,4 +116,34 @@ public class ExceptionSupplier {
             LocalDateTime.now().format(formatter),
             ErrorMessages.NOT_FOUND.getErrorMessage()
     );
+
+    public static final Supplier<FormException> userNotFound = () -> new FormException(
+            ErrorMessages.USER_NOT_FOUND.getErrorMessage(),
+            HttpStatus.NOT_FOUND.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.NOT_FOUND.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> textValueIsNotValid = () -> new FormException(
+            ErrorMessages.TEXT_NOT_VALID.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> numberValueIsNotValid = () -> new FormException(
+            ErrorMessages.NUMBER_NOT_VALID.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
+    public static final Supplier<FormException> fieldAlreadyFilled = () -> new FormException(
+            ErrorMessages.FIELD_ALREADY_FILLED.getErrorMessage(),
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now().format(formatter),
+            ErrorMessages.BAD_REQUEST.getErrorMessage()
+    );
+
+
 }

@@ -9,8 +9,7 @@ public class PrincipalHelper {
 
     public static String getAuthUserRole() {
         String role = null;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
+        Object principal = getPrincipal();
         if (principal instanceof UserEntity userEntity) {
             role = userEntity.getRole();
         }
@@ -23,5 +22,20 @@ public class PrincipalHelper {
         if (authUserRole.equals("USER")) {
             throw ExceptionSupplier.userDoesNotHavePermission.get();
         }
+    }
+
+    public static Integer getLoggedInUserId() {
+        Integer id = null;
+        Object principal = getPrincipal();
+        if (principal instanceof UserEntity userEntity) {
+            id = userEntity.getId();
+        }
+
+        return id;
+    }
+
+    public static Object getPrincipal() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getPrincipal();
     }
 }

@@ -1,9 +1,12 @@
 package com.formapp.damnjan.mappers;
 
 import com.formapp.damnjan.entities.FieldEntity;
+import com.formapp.damnjan.entities.FieldUserEntity;
 import com.formapp.damnjan.entities.FormEntity;
+import com.formapp.damnjan.entities.FormUserEntity;
 import com.formapp.damnjan.models.request.FieldRequestDto;
 import com.formapp.damnjan.models.response.FieldResponseModel;
+import com.formapp.damnjan.models.response.FormResponseModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -28,4 +31,15 @@ public interface FieldMapper {
     FieldResponseModel fieldEntityToFieldResponseModel(FieldEntity fieldEntity);
 
     List<FieldResponseModel> fieldEntityToFieldResponseModels(List<FieldEntity> content);
+
+    List<FieldResponseModel> filledFieldEntityToFieldResponseModels(List<FieldUserEntity> content);
+
+    @Mapping(target = "formResponseModel", source = "fieldUserEntity.formUserEntity")
+    @Mapping(target = "name", source = "fieldUserEntity.fieldEntity.name")
+    @Mapping(target = "orderDisplay", source = "fieldUserEntity.fieldEntity.orderDisplay")
+    @Mapping(target = "type", source = "fieldUserEntity.fieldEntity.type")
+    FieldResponseModel fieldEntityToFieldResponseModel(FieldUserEntity fieldUserEntity);
+
+    @Mapping(target = "user", source = "formUserEntity.userEntity")
+    FormResponseModel fieldEntityToFieldResponseModel(FormUserEntity formUserEntity);
 }

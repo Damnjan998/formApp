@@ -16,8 +16,13 @@ public enum ErrorMessages {
     FORBIDDEN("FORBIDDEN"),
     BAD_REQUEST("Bad request."),
     FORM_NOT_FOUND("There is no form with provided id."),
-    FIELD_NOT_FOUND("There is no field with provided id.");
-
+    FILLED_FORM_NOT_FOUND("There is no filled form with provided id."),
+    FIELD_NOT_FOUND("There is no field with provided id."),
+    USER_NOT_FOUND("User not found."),
+    TEXT_NOT_VALID("Text value is not valid."),
+    NUMBER_NOT_VALID("Number value is not valid."),
+    FIELD_ALREADY_FILLED("Field is already filled."),
+    FILLED_FIELD_NOT_FOUND("There is no filled field with provided id.");
 
     private String errorMessage;
 

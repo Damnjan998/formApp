@@ -1,14 +1,19 @@
 package com.formapp.damnjan.entities;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.apache.catalina.User;
+import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "field_user")
+@EntityListeners(AuditingEntityListener.class)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class FieldUserEntity {
@@ -21,9 +26,11 @@ public class FieldUserEntity {
     private String textValue;
 
     @Column(name = "number_value")
+    @Nullable
     private Double numberValue;
 
     @Column(name = "created_at")
+    @Nullable
     private Timestamp createdAt;
 
     @Column(name = "updated_at")
@@ -31,6 +38,7 @@ public class FieldUserEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @CreatedBy
     private UserEntity userEntity;
     @ManyToOne
     @JoinColumn(name = "field_id")

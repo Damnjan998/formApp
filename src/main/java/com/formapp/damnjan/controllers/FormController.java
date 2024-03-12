@@ -1,5 +1,6 @@
 package com.formapp.damnjan.controllers;
 
+import com.formapp.damnjan.models.request.FillFormRequestDto;
 import com.formapp.damnjan.models.request.FormRequestDto;
 import com.formapp.damnjan.models.response.TextResponseMessage;
 import com.formapp.damnjan.services.FormService;
@@ -47,7 +48,33 @@ public class FormController {
 
     @GetMapping("/{id}")
     public ResponseEntity getFormById(@PathVariable Integer id) {
-        formService.getFormById(id);
         return ResponseEntity.ok(formService.getFormById(id));
+    }
+
+    @PostMapping("/fill")
+    public ResponseEntity<TextResponseMessage> fillForm(@RequestBody FillFormRequestDto fillFormRequestDto) {
+
+        formService.fillForm(fillFormRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new TextResponseMessage("Filled form created",
+                HttpStatus.CREATED.value()));
+    }
+
+    @DeleteMapping("/fill/{id}")
+    public ResponseEntity<TextResponseMessage> deleteFilledForm(@PathVariable Integer id) {
+
+        formService.deleteFilledForm(id);
+        return ResponseEntity.status(HttpStatus.OK).body(new TextResponseMessage("Filled form deleted",
+                HttpStatus.OK.value()));
+    }
+
+    @GetMapping("/fill")
+    public ResponseEntity getFilledForms(@RequestParam(defaultValue = "1") Integer page,
+                                         @RequestParam(defaultValue = "5") Integer size) {
+        return ResponseEntity.ok(formService.getFilledForms(page, size));
+    }
+
+    @GetMapping("/fill/{id}")
+    public ResponseEntity getFilledFormById(@PathVariable Integer id) {
+        return ResponseEntity.ok(formService.getFilledFormById(id));
     }
 }
