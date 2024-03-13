@@ -17,18 +17,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.function.Function;
 
+import static com.formapp.damnjan.config.SecurityConstants.*;
+
 @Component
 public class JWTUtils {
 
     private final SecretKey key;
-    private static final long EXPIRATION = 86400000; // 24 hours
     private final UserRepository userRepository;
 
     public JWTUtils(UserRepository userRepository) {
         this.userRepository = userRepository;
-        String secretString = "5fd5c39d88c496509eae9b49bf2ed888668f8e11ab07ca9db2563a1d1ca73a5c";
-        byte[] keyByte = Base64.getDecoder().decode(secretString.getBytes(StandardCharsets.UTF_8));
-        this.key = new SecretKeySpec(keyByte, "HmacSHA256");
+        byte[] keyByte = Base64.getDecoder().decode(SECRET_STRING.getBytes(StandardCharsets.UTF_8));
+        this.key = new SecretKeySpec(keyByte, SECRET_KEY_ALGORITHM);
     }
 
     public String generateToken(UserDetails userDetails) {

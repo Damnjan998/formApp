@@ -155,7 +155,7 @@ public class FieldService {
             throw ExceptionSupplier.fieldAlreadyFilled.get();
         }
 
-        if (ObjectUtils.isEmpty(fillFieldRequestDto.textValue())) {
+        if (fillFieldRequestDto.textValue().strip().equals("")) {
             throw ExceptionSupplier.textValueIsNotValid.get();
         }
 

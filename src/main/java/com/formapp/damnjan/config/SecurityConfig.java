@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.formapp.damnjan.config.SecurityConstants.*;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -33,13 +35,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/form/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/form/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/form/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.POST,"/field/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/field/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/field/**").hasAnyAuthority("ADMIN")
+                .authorizeHttpRequests(request -> request.requestMatchers(AUTH_PATTERN, SWAGGER_UI).permitAll()
+                        .requestMatchers(HttpMethod.POST, FORM_PATTERN).hasAnyAuthority(ADMIN)
+                        .requestMatchers(HttpMethod.DELETE, FORM_PATTERN).hasAnyAuthority(ADMIN)
+                        .requestMatchers(HttpMethod.PUT, FORM_PATTERN).hasAnyAuthority(ADMIN)
+                        .requestMatchers(HttpMethod.POST, FIELD_PATTERN).hasAnyAuthority(ADMIN)
+                        .requestMatchers(HttpMethod.DELETE, FIELD_PATTERN).hasAnyAuthority(ADMIN)
+                        .requestMatchers(HttpMethod.PUT, FIELD_PATTERN).hasAnyAuthority(ADMIN)
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

@@ -17,7 +17,7 @@ public class StatisticScheduler {
         this.statisticService = statisticService;
     }
 
-    @Scheduled(cron = "0 0 * * * ?")
+    @Scheduled(cron = "0 0 0 * * ?", zone = "Europe/Paris")
     public void logStatistic() {
         logger.info("Logging in statistic table");
         statisticService.logStatisticForCurrentDay();

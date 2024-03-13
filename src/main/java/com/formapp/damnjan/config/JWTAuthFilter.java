@@ -16,6 +16,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+import static com.formapp.damnjan.config.SecurityConstants.AUTHORIZATION_HEADER_STRING;
+
 @Component
 public class JWTAuthFilter extends OncePerRequestFilter {
 
@@ -31,7 +33,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        final String authHeader = request.getHeader("Authorization");
+        final String authHeader = request.getHeader(AUTHORIZATION_HEADER_STRING);
         final String jwtToken;
         final String username;
 
