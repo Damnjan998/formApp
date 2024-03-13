@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS `field` (
     type VARCHAR(50),
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
-    FOREIGN KEY (form_id) REFERENCES form(id)
+    FOREIGN KEY (form_id) REFERENCES form(id) ON DELETE NO ACTION
 );

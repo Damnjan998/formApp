@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS `form_user` (
     updated_at TIMESTAMP,
     user_id INT,
     last_user_to_modify INT,
-    FOREIGN KEY (form_id) REFERENCES form(id),
-    FOREIGN KEY (user_id) REFERENCES `user`(id)
+    FOREIGN KEY (form_id) REFERENCES form(id) ON DELETE NO ACTION,
+    FOREIGN KEY (user_id) REFERENCES `user`(id) ON DELETE NO ACTION
 );
