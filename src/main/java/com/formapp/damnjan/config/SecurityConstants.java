@@ -3,7 +3,6 @@ package com.formapp.damnjan.config;
 public class SecurityConstants {
 
     public static final String AUTH_PATTERN = "/auth/**";
-    public static final String SWAGGER_UI = "/swagger-ui.html";
     public static final String FORM_PATTERN = "/form/**";
     public static final String FIELD_PATTERN = "/field/**";
     public static final String ADMIN = "ADMIN";

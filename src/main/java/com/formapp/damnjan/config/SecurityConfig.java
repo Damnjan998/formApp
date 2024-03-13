@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static com.formapp.damnjan.config.SecurityConstants.*;
+import static com.formapp.damnjan.config.SwaggerConstants.*;
 
 @Configuration
 @EnableWebSecurity
@@ -35,7 +36,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers(AUTH_PATTERN, SWAGGER_UI).permitAll()
+                .authorizeHttpRequests(request -> request.requestMatchers(AUTH_PATTERN,
+                                SWAGGER_UI_INDEX,
+                                SWAGGER_DOCS,
+                                SWAGGER_V3_DOCS,
+                                V2_API_DOCS,
+                                SWAGGER_RESOURCES,
+                                SWAGGER_CONFIGURATION_UI,
+                                SWAGGER_CONFIGURATION_SECURITY,
+                                SWAGGER_UI_HTML,
+                                SWAGGER_UI,
+                                WEBJARS).permitAll()
                         .requestMatchers(HttpMethod.POST, FORM_PATTERN).hasAnyAuthority(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, FORM_PATTERN).hasAnyAuthority(ADMIN)
                         .requestMatchers(HttpMethod.PUT, FORM_PATTERN).hasAnyAuthority(ADMIN)
